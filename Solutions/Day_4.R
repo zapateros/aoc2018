@@ -1,5 +1,5 @@
 # 4.1 ----
-t<-readLines("numbers.txt")
+t<-readLines("input_day_4.txt")
 tx<-substring(t,2)
 tx1<-t(sapply(strsplit(tx,"] "),function(x){x}))
 tx1[,2]<-gsub("Guard ","",tx1[,2])
