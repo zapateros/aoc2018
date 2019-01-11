@@ -3,10 +3,10 @@ t     <- read.table("input_day_2.txt")
 two   <- 0
 three <- 0
 for(i in 1:nrow(t)){
-  char <- unlist(strsplit(as.character(t$V1[i]),""))
+  char <- unlist(strsplit(as.character(t$V1[i]), ""))
   tb   <- table(char)
-  if(2 %in% tb){two <- two+1}
-  if(3 %in% tb){three <- three+1}
+  if(2 %in% tb){two   <- two + 1}
+  if(3 %in% tb){three <- three + 1}
 }
 two*three
 
@@ -15,7 +15,7 @@ two*three
 t <- read.table("input_day_2.txt")
 for(i in 1:nrow(t)){
   ch1 <- unlist(strsplit(as.character(t$V1[i]),""))
-  for(j in (i+1):nrow(t)){
+  for(j in (i + 1):nrow(t)){
     ch2 <- unlist(strsplit(as.character(t$V1[j]),""))
     df  <- sum(ch1!=ch2)
     if(df == 1){
