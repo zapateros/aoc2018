@@ -140,6 +140,8 @@ combat          <- as.data.frame(combat)
 is_adjacent(combat)
 combat$adjacent <- adjs
 
+combat$power[which(combat$player=="E")]<-14 # for 15.2, binary search the lowest number
+
 it <- 0
 i  <- 0
 while(length(unique(combat$player)) > 1){
