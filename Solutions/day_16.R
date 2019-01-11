@@ -257,154 +257,131 @@ e     <- as.matrix(ee)
 see   <-NULL
 input <- c(0, 1, 1, 0)
 for(i in 1:nrow(ee)){
-  
-  ins<-e[i,]
-  
-  
-  if(ins[1]==0){
-    x1<-ins[2]
-    x2<-input[x1+1]
-    x3<-ins[3]
-    x4<-input[x3+1]
+  ins <- e[i,]
+  if(ins[1] == 0){
+    x1 <- ins[2]
+    x2 <- input[x1 + 1]
+    x3 <- ins[3]
+    x4 <- input[x3 + 1]
+    x5 <- ins[4]
+    input[x5 + 1] <- bitwOr(x2, x4)
+  }else if(ins[1] == 1){
+    x1 <- ins[2]
+    x2 <- input[x1 + 1]
+    x3 <- ins[3]
+    x4 <- input[x3 + 1]
+    x5 <- ins[4]
+    input[x5 + 1] <- x2 + x4
+  }else if(ins[1] == 2){
+    x1 <- ins[2]
+    x2 <- input[x1 + 1]
+    x3 <- ins[3]
+    x4 <- input[x3 + 1]
     x5<-ins[4]
-    input[x5+1]<-bitwOr(x2,x4)
-  }else if(ins[1]==1){
-    x1<-ins[2]
-    x2<-input[x1+1]
-    x3<-ins[3]
-    x4<-input[x3+1]
-    x5<-ins[4]
-    input[x5+1]<-x2+x4
-  }else if(ins[1]==2){
-    x1<-ins[2]
-    x2<-input[x1+1]
-    
-    x3<-ins[3]
-    x4<-input[x3+1]
-    
-    x5<-ins[4]
-    
-    if(x2==x4){
-      input[x5+1]<-1
+    if(x2 == x4){
+      input[x5 + 1] <- 1
     }else{
-      input[x5+1]<-0
+      input[x5 +1] <- 0
     }
-  }else if(ins[1]==3){
-    x1<-ins[2]
-    x2<-input[x1+1]
-    x4<-ins[3]
-    x5<-ins[4]
-    input[x5+1]<-x2+x4
-  }else if(ins[1]==4){
-    x1<-ins[2]
-    x2<-input[x1+1]
-    
-    x3<-ins[3]
-    
-    x5<-ins[4]
-    
-    if(x2==x3){
-      input[x5+1]<-1
+  }else if(ins[1] == 3){
+    x1 <- ins[2]
+    x2 <- input[x1 + 1]
+    x4 <- ins[3]
+    x5 <- ins[4]
+    input[x5 + 1] <- x2 + x4
+  }else if(ins[1] == 4){
+    x1 <- ins[2]
+    x2 <- input[x1 + 1]
+    x3 <- ins[3]
+    x5 <- ins[4]
+    if(x2 == x3){
+      input[x5 + 1] <- 1
     }else{
-      input[x5+1]<-0
+      input[x5 + 1] <- 0
     }
-  }else if(ins[1]==5){
-    x1<-ins[2]
-    x2<-ins[3]
-    x3<-input[x2+1]
-    x5<-ins[4]
-    
-    if(x1==x3){
-      input[x5+1]<-1
+  }else if(ins[1] == 5){
+    x1 <- ins[2]
+    x2 <- ins[3]
+    x3 <- input[x2 + 1]
+    x5 <- ins[4]
+    if(x1 == x3){
+      input[x5 + 1] <- 1
     }else{
-      input[x5+1]<-0
+      input[x5 + 1] <- 0
     }
-  }else if(ins[1]==6){
-    x1<-ins[2]
-    x2<-input[x1+1]
-    
-    x3<-ins[3]
-    
-    x5<-ins[4]
-    
-    if(x2>x3){
-      input[x5+1]<-1
+  }else if(ins[1] == 6){
+    x1 <- ins[2]
+    x2 <- input[x1 + 1]
+    x3 <- ins[3]
+    x5 <- ins[4]
+    if(x2 > x3){
+      input[x5 + 1] <- 1
     }else{
-      input[x5+1]<-0
+      input[x5 + 1] <- 0
     }
-  }else if(ins[1]==7){
-    x1<-ins[2]
-    x2<-input[x1+1]
-    x3<-ins[3]
-    x4<-input[x3+1]
-    x5<-ins[4]
-    input[x5+1]<-x2*x4
-  }else if(ins[1]==8){
-    x1<-ins[2]
-    x2<-input[x1+1]
-    
-    x5<-ins[4]
-    input[x5+1]<-x2
-  }else if(ins[1]==9){
-    x1<-ins[2]
-    x2<-ins[3]
-    x3<-input[x2+1]
-    x5<-ins[4]
-    
-    if(x1>x3){
-      input[x5+1]<-1
+  }else if(ins[1] == 7){
+    x1 <- ins[2]
+    x2 <- input[x1 + 1]
+    x3 <- ins[3]
+    x4 <- input[x3 + 1]
+    x5 <- ins[4]
+    input[x5 + 1] <- x2 * x4
+  }else if(ins[1] == 8){
+    x1 <- ins[2]
+    x2 <- input[x1 + 1]
+    x5 <- ins[4]
+    input[x5 + 1] <- x2
+  }else if(ins[1] == 9){
+    x1 <- ins[2]
+    x2 <- ins[3]
+    x3 <- input[x2 + 1]
+    x5 <- ins[4]
+    if(x1 > x3){
+      input[x5 + 1] <- 1
     }else{
-      input[x5+1]<-0
+      input[x5 + 1] <- 0
     }
-  }else if(ins[1]==10){
-    x1<-ins[2]
-    x2<-input[x1+1]
-    x4<-ins[3]
-    x5<-ins[4]
-    input[x5+1]<-x2*x4
-  }else if(ins[1]==11){
-    x1<-ins[2]
-    x2<-input[x1+1]
-    x3<-ins[3]
-    x4<-input[x3+1]
-    x5<-ins[4]
-    input[x5+1]<-bitwAnd(x2,x4)
-    
-  }else if(ins[1]==12){
-    x1<-ins[2]
-    
-    x5<-ins[4]
-    input[x5+1]<-x1
-  }else if(ins[1]==13){
-    x1<-ins[2]
-    x2<-input[x1+1]
-    
-    x3<-ins[3]
-    x4<-input[x3+1]
-    
-    x5<-ins[4]
-    
-    if(x2>x4){
-      input[x5+1]<-1
+  }else if(ins[1] == 10){
+    x1 <- ins[2]
+    x2 <- input[x1 + 1]
+    x4 <- ins[3]
+    x5 <- ins[4]
+    input[x5 + 1] <- x2 * x4
+  }else if(ins[1] == 11){
+    x1 <- ins[2]
+    x2 <- input[x1 + 1]
+    x3 <- ins[3]
+    x4 <- input[x3 + 1]
+    x5 <- ins[4]
+    input[x5 + 1] <- bitwAnd(x2, x4)
+  }else if(ins[1] == 12){
+    x1 <- ins[2]
+    x5 <- ins[4]
+    input[x5 + 1] <- x1
+  }else if(ins[1] == 13){
+    x1 <- ins[2]
+    x2 <- input[x1 + 1]
+    x3 <- ins[3]
+    x4 <- input[x3 + 1]
+    x5 <- ins[4]
+    if(x2 > x4){
+      input[x5 + 1] <- 1
     }else{
-      input[x5+1]<-0
+      input[x5 + 1] <- 0
     }
-  }else if(ins[1]==14){
-    x1<-ins[2]
-    x2<-input[x1+1]
-    x4<-ins[3]
-    x5<-ins[4]
-    input[x5+1]<-bitwAnd(x2,x4)
-  }else if(ins[1]==15){
-    x1<-ins[2]
-    x2<-input[x1+1]
-    x4<-ins[3]
-    x5<-ins[4]
-    input[x5+1]<-bitwOr(x2,x4)
-    
-  }
-  
-  see<-rbind(see,input)
-  
+  }else if(ins[1] == 14){
+    x1 <- ins[2]
+    x2 <- input[x1 + 1]
+    x4 <- ins[3]
+    x5 <- ins[4]
+    input[x5 + 1] <- bitwAnd(x2, x4)
+  }else if(ins[1] == 15){
+    x1 <- ins[2]
+    x2 <- input[x1 + 1]
+    x4 <- ins[3]
+    x5 <- ins[4]
+    input[x5 + 1] <- bitwOr(x2, x4)
+   }
+see<-rbind(see,input)
 }
-
+tail(see)
