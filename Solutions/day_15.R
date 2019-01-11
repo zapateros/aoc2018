@@ -51,16 +51,16 @@
 # FUNCTIONS
 # 1. find adjacent ground pairs (non-directional). works with outer edges are walls
 find_adj_gr_pairs <- function(vector){
-  adj_pairs <- NULL
+  adj_pairs<-NULL
   for(i in 1:length(vector)){
     if(vector[i] == "."){
-      nxt <- vector[i+1]
+      nxt <- vector[i + 1]
       if(nxt == "."){
-        adj_pairs <- rbind(adj_pairs,c(i,i+1))
+        adj_pairs <- rbind(adj_pairs, c(i, i + 1))
       }
-      und <- vector[i+n]
+      und <- vector[i + n]
       if(und == "."){
-        adj_pairs <- rbind(adj_pairs,c(i,i+n))
+        adj_pairs <- rbind(adj_pairs, c(i, i + n))
       }
     }
   }
@@ -69,23 +69,23 @@ find_adj_gr_pairs <- function(vector){
 
 # 2. find if player has an adjacent enemy
 is_adjacent <- function(matrix){
-  adjs<-NULL
-  for(i in 1:nrow(matrix)){
+  adjs <- NULL
+  for(i in 1:nrow(matrix)){    
     sort  <- matrix$player[i]
-    p_loc <- matrix[!matrix$player==sort,1] 
+    p_loc <- matrix[!matrix$player == sort, 1] 
     loc   <- matrix$loc[i]  
-    if(any(p_loc == loc+1 | p_loc == loc-1 | p_loc == loc+n | p_loc == loc-n )){
+    if(any(p_loc == loc + 1 | p_loc == loc - 1 | p_loc == loc + n | p_loc == loc - n )){
       adj <- 1
     }else{
       adj <- 0
     }
-    adjs <- c(adjs,adj)
+    adjs <- c(adjs, adj)
   }
   adjs <<- adjs
 }
 
 # 3. find neighbours of point, vector is the vector with the relevant neighbours 
-neighb_gr <- function(point,vector){
+neighb_gr <- function(point, vector){
   nbs        <-  c(point - n, point - 1, point + 1, point + n)
   nbs        <-  nbs[nbs %in% vector]
   neighbours <<- nbs  
@@ -140,9 +140,9 @@ combat          <- as.data.frame(combat)
 is_adjacent(combat)
 combat$adjacent <- adjs
 
-it <-0
+it <- 0
 i  <- 0
-while(length(unique(combat$player)) > 1){  
+while(length(unique(combat$player)) > 1){
   i <- i + 1
   if(i > nrow(combat)){
     i <- 1
@@ -154,16 +154,15 @@ while(length(unique(combat$player)) > 1){
       cat(it, ": ", combat$hp)
     }
   }
-  ground <- which(t == ".")
+  ground <- which(t==".")
   
   #MOVING PHASE
-  if(combat$adjacent[i] == 0){   
+  if(combat$adjacent[i] == 0){
     #calculate possible startpoints. If none, next unit
     rel_point    <- combat$loc[i]
     neighb_gr(rel_point, ground)
     start_points <- neighbours
     if(length(start_points) > 0){
-      
       #calculate possible endpoints. If none, next unit
       rel_player <- combat$player[i]
       rel_c      <- combat[which(combat$player != rel_player),]
@@ -186,12 +185,12 @@ while(length(unique(combat$player)) > 1){
         
         #create a list of all shortest paths from every start- to endpoint
         s_paths <- NULL
-        for(k in 1:length(start_points)){         
+        for(k in 1:length(start_points)){
             #making sure end- and start points are in adjacency pairs
             if(any(end_points %in% adj_pairs) & (start_points[k] %in% adj_pairs)){
               sps     <- shortest_paths(edge_list, start_points[k], end_points)
-              s_paths <- c(s_paths, sps$vpath)  
-          }  
+              s_paths <- c(s_paths, sps$vpath)
+            }  
         }
         
         if(length(unlist(s_paths)) == 0){ next }else{
@@ -212,14 +211,12 @@ while(length(unique(combat$player)) > 1){
           }
           s_paths_starts <- sapply(s_paths, function(x){x[1]})
           min_start      <- min(s_paths_starts)
-          #w_min_start   <- which(s_paths_starts == min_start)
-          #s_paths       <- s_paths[w_min_start]
-         
+                
           #move the relevant player in both t and combat
           t[rel_point]  <- "."
           t[min_start]  <- as.character(rel_player)
           combat$loc[i] <- min_start
-        }        
+        }       
       }else{
         next
       }
@@ -229,8 +226,8 @@ while(length(unique(combat$player)) > 1){
     }else{
       next
     }
- }
-   
+  }
+  
   #ATTACKING PHASE 
   if(combat$adjacent[i] == 1){
     rel_point    <- combat$loc[i]
