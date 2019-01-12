@@ -7,6 +7,23 @@
 # my solution was already 'on the tips of my fingers'
 # Well.. on the upside.. now I have something to beat next year
 
+
+# 23.1
+tt   <- readLines("input_day_23.txt")
+tt   <- gsub("pos=<","",tt)
+tt   <- gsub(">","",tt)
+tt   <- gsub(" r=","",tt)
+tt   <- gsub("\n",",",tt)
+tt   <- as.numeric(unlist(strsplit(tt,",")))
+t    <- matrix(tt, ncol = 4, byrow = T)
+mx   <- which.max(t[, 4])
+a    <- abs(t[, 1] - t[mx, 1])
+b    <- abs(t[, 2] - t[mx, 2])
+c    <- abs(t[, 3] - t[mx, 3])
+tog  <- a + b + c
+mxrd <- t[mx, 4]
+sum(tog <= mxrd)
+
 # 23.2
 tt     <- readLines("input_day_23.txt")
 tt     <- gsub("pos=<","",tt)
