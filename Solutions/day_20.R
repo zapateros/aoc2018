@@ -59,89 +59,71 @@ while(1 == 1){
 cat("result: ", nchar(t) - 6)
 
 
-
-
-
+# 20.2
 library(igraph)
-tt<-readLines("input_day_20.txt")
-
-
-t<-unlist(strsplit(tt,""))
+tt <- readLines("input_day_20.txt")
+t  <- unlist(strsplit(tt, ""))
 
 # N E S W
-N<-c(-1,0)
-E<-c(0,1)
-S<-c(1,0)
-W<-c(0,-1)
-
-pt<-c(0,0)
-from<-NULL
-to<-NULL
-stpt<-NULL
-
+N    <- c(-1, 0)
+E    <- c(0, 1)
+S    <- c(1, 0)
+W    <- c(0, -1)
+pt   <- c(0, 0)
+from <- NULL
+to   <- NULL
+stpt <- NULL
 for(i in 1:length(t)){
-  
-  if(t[i]=="E" | t[i]=="N" | t[i]=="S" | t[i]=="W"){
-    
-    from<-rbind(from,pt)
-    pt<-pt+eval(parse(text=t[i]))
-    to<-rbind(to,pt)
-    
-  }else if(t[i]=="("){
-    
+  if(t[i] == "E" | t[i] == "N" | t[i] == "S" | t[i] == "W"){
+    from <- rbind(from, pt)
+    pt   <- pt + eval(parse(text = t[i]))
+    to   <- rbind(to, pt)
+  }else if(t[i] == "("){
     stpt<-rbind(stpt,pt)
-    
-  }else if(t[i]=="|"){
-    nn<-length(stpt)/2
-    if(nn>1){
-      pt<-stpt[nn,]
+  }else if(t[i] == "|"){
+    nn <- length(stpt) / 2
+    if(nn > 1){
+      pt <- stpt[nn,]
     }else{
-      pt<-stpt
+      pt <- stpt
     }
     
-  }else if(t[i]==")"){
-    nn<-length(stpt)/2
-    n<-nn-1
-    if(nn>1){
-      pt<-stpt[nn,]
-      stpt<-stpt[0:n,]
+  }else if(t[i] == ")"){
+    nn <- length(stpt) / 2
+    n  <- nn - 1
+    if(nn > 1){
+      pt   <- stpt[nn,]
+      stpt <- stpt[0:n,]
     }else{
-      pt<-stpt
-      stpt<-NULL
-    }
-    
+      pt   <- stpt
+      stpt <- NULL
+    }  
   }
-
 }
 
-j<-NULL
+j <- NULL
 for(i in 1:nrow(from)){
-  xx<-paste(from[i,1],from[i,2],sep=",")
-  j<-c(j,xx)
+  xx <- paste(from[i, 1], from[i, 2], sep = ",")
+  j  <- c(j, xx)
 }
 
-d<-NULL
+d <- NULL
 for(i in 1:nrow(to)){
-  xx<-paste(to[i,1],to[i,2],sep=",")
-  d<-c(d,xx)
+  xx <- paste(to[i, 1], to[i, 2], sep = ",")
+  d  <- c(d, xx)
 }
 
-
-un<-unique(c(j,d))
-
-smn<-cbind(j,d)
-t1<-graph_from_edgelist(smn,directed = FALSE)
-
-all<-NULL
-hlp<-NULL
-uu<-0
+un  <- unique(c(j, d))
+smn <- cbind(j, d)
+t1  <- graph_from_edgelist(smn, directed = FALSE)
+all <- NULL
+hlp <- NULL
+uu  <- 0
 for(i in 1:length(un)){
-  uu<-uu+1
-  el<-all_shortest_paths(t1,from = "0,0",to = un[i])
-  am<-length(el$res[[1]])-1
-  all<-c(all,am)
-  cat(uu,"\n")
+  uu  <- uu + 1
+  el  <- all_shortest_paths(t1, from = "0,0", to = un[i])
+  am  <- length(el$res[[1]]) - 1
+  all <- c(all, am)
+  cat(uu, "\n")
 }
-
-
-
+sum(all > 999)
