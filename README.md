@@ -15,5 +15,8 @@ There were also a couple of problems where I PoC'd a solution but I didn't know 
 <li> Day 14.2: similar to 9.2, I checked if the brute force method was a common used method. It was, so I implemented it in python again.
 <li> Day 17: I checked if people did this one manually (as I hoped). They did, so I did too. 
 <li> Day 19: I checked if I had to put my time in reverse engineering the input or that there was just a trick I was missing. I actually was afraid of reverse engineering but in the end, day 19 was one of my favorite problems. Next time I just go on and reverse engineer this type of problems because I really enjoyed doing it. I was glad to see day 22 had a similar problem. 
-<li> Day 23: After writing a pragmatic solution, which had a stochastic chance of working (or not working) I realized it was a typical minimization/maximization problem. It had been some time since I implemented such methods so I checked on the forum what maxi/minimization method they were useing. Right after I checked I was a little bit sad I didn't had the perseverance to just solve it completely without help, as I already had the method ready. 
- 
+<li> Day 23: after writing a pragmatic solution, which had a stochastic chance of working (or not working) I realized it was a typical minimization/maximization problem. It had been some time since I implemented such methods so I checked on the forum what maxi/minimization method they were using. Right after I checked I was a little bit sad I didn't had the perseverance to just solve it completely without help, as I already had the method ready. 
+
+I really had a blast solving the problems of this Advent of Code and above all, I learned some new methods. Especially the shortest-path method, linked lists and double ended queues could really help me with future problems.
+
+I added these notes so I can challenge myself next year
