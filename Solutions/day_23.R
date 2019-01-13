@@ -24,7 +24,7 @@ tog  <- a + b + c
 mxrd <- t[mx, 4]
 sum(tog <= mxrd)
 
-# 23.2
+# 23.2 SOLUTION 1, stochastic chance for the right result. Better solution at the bottom
 tt     <- readLines("input_day_23.txt")
 tt     <- gsub("pos=<","",tt)
 tt     <- gsub(">","",tt)
@@ -97,7 +97,7 @@ while(1 == 1){
   mx1 <- c(x_min, y_min, z_min) + mx * amount
 }
 
-#optimization solution DEoptim (searches minimum)
+# 23.2 SOLUTION 2: optimization solution DEoptim (searches minimum)
 tt <- readLines("input_day_23.txt")
 tt <- gsub("pos=<","",tt)
 tt <- gsub(">","",tt)
@@ -116,7 +116,7 @@ amount_bots<-function(point){
   1000 - uu
 }
 
-#points have slight variations so round them. without doing this, the function works less
+#points have slight variations so round them
 round_x <- function(x) { x[1:3] <- round(x[1:3]) } 
 
 max_r <- max(t[,4])
